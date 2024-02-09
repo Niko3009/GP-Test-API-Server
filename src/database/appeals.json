@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Ivan",
+    "books": [
+      { "title": "War and Peace" },
+      { "title": "Master and Margarita" },
+      { "title": "The Lord of the Rings" }
+    ],
+    "isTicketValid": true
+  }
+]
