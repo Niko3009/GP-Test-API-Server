@@ -1,12 +1,16 @@
 [
   {
     "id": 1,
-    "name": "Ivan",
-    "books": [
-      { "title": "War and Peace" },
-      { "title": "Master and Margarita" },
-      { "title": "The Lord of the Rings" }
-    ],
-    "isTicketValid": true
+    "date": "24.01.2024",
+    "autor": "Dima",
+    "type": "In order",
+    "status": "ok"
+  },
+  {
+    "id": 2,
+    "date": "24.01.2024",
+    "autor": "Dima",
+    "type": "In order",
+    "status": "ok"
   }
 ]

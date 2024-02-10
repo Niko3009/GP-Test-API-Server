@@ -12,7 +12,10 @@ app.listen(PORT, () => {
 
 app.use(router);
 
-app.get("/", (req, res) => res.status(200).send(`API is running`));
-app.get("*", (req, res) =>
-  res.status(404).send({ error: "Unknown endpoint!" })
-);
+app.get("/", (req, res) => {
+  res.status(200).send(`API is running`);
+});
+
+app.get("*", (req, res) => {
+  res.status(404).send({ error: "Unknown endpoint!" });
+});

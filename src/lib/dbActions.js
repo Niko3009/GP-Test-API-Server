@@ -8,10 +8,11 @@ const options = { encoding: "utf-8" };
 
 export const readData = async () => {
   const data = JSON.parse(await readFile(dbFile, options));
-  return data
+  return data;
 };
 
-export const writeData = async (data) => {
-  const result = JSON.parse(await writeFile(dbFile, options));
-  return result;
+export const writeData = async (newData) => {
+  await writeFile(dbFile, JSON.stringify(newData));
+  const newFileData = await readData();
+  return newFileData;
 };
