@@ -1,4 +1,3 @@
-import getDate from "date-and-time";
 import uniqid from "uniqid";
 
 import { readData, writeData } from "./dbActions.js";
@@ -22,7 +21,7 @@ export const addAppeal = async (req, res) => {
   const body = req.body;
   const { autor, description } = body;
 
-  const date = getDate.format(new Date(), "DD.MM.YYYY");
+  const date = new Date();
   const id = uniqid();
 
   const isAvailableType = availableTypes.includes(body?.type);
@@ -37,6 +36,6 @@ export const addAppeal = async (req, res) => {
   const newAppealsList = [...oldAppealsList, newAppeal];
 
   const newData = await writeData(newAppealsList);
-  
+
   res.status(200).send(getResData(newData));
 };
