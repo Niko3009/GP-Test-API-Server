@@ -1,4 +1,5 @@
 import uniqid from "uniqid";
+import logger from "../lib/config/logger.js";
 
 import { readData, writeData } from "./dbActions.js";
 import { getResData } from "./funcs/getData.js";
@@ -14,15 +15,17 @@ const availableStatuses = ["waiting", "processing", "ready"];
 
 export const getAllAppeals = async (req, res) => {
   const data = await readData();
+  logger.info(`controller getAllAppeals`);
   res.status(200).send(getResData(data));
 };
 
 export const addAppeal = async (req, res) => {
   const body = req.body;
-  const { autor, description } = body;
 
-  const date = new Date();
   const id = uniqid();
+  const date = new Date();
+  const autor = body?.autor;
+  const description = body?.description;
 
   const isAvailableType = availableTypes.includes(body?.type);
   const type = isAvailableType ? body?.type : availableTypes[0];
@@ -37,5 +40,7 @@ export const addAppeal = async (req, res) => {
 
   const newData = await writeData(newAppealsList);
 
+  logger.info(`controller addAppeal`);
+  logger.info(JSON.stringify(body));
   res.status(200).send(getResData(newData));
 };
