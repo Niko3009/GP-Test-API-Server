@@ -2,13 +2,7 @@ import uniqid from "uniqid";
 import logger from "../lib/config/logger.js";
 
 import { readData, writeData } from "./dbActions.js";
-import { getResData } from "./funcs/getData.js";
-
-// interface Game ={
-//   name: string;
-//   price: number;
-//   id: string;
-// }
+import { getResData, getErrData } from "./funcs/getData.js";
 
 const availableTypes = ["mistake", "remark", "recommendation"];
 const availableStatuses = ["waiting", "processing", "ready"];
@@ -19,7 +13,7 @@ export const getAllAppeals = async (req, res) => {
     logger.info(`controller getAllAppeals`);
     res.status(200).send(getResData(data));
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(getErrData(err));
   }
 };
 
@@ -49,6 +43,6 @@ export const addAppeal = async (req, res) => {
     logger.info(JSON.stringify(body));
     res.status(200).send(getResData(newData));
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(getErrData(err));
   }
 };
