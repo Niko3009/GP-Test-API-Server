@@ -12,7 +12,7 @@ export const getAllAppeals = async (req, res) => {
     const data = await readData();
     logger.info(`controller getAllAppeals`);
     res.status(200).send(getResData(data));
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).send(getErrData(err));
   }
 };

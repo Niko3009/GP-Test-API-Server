@@ -6,6 +6,6 @@ export const getResData = (data = null, status = "success", details = "ok") => {
   return { status, details, data };
 };
 
-export const getErrData = (error = "Unknown error") => {
+export const getErrData = (error: any = "Unknown error") => {
   return getResData(null, "error", error);
 };
