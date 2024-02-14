@@ -6,11 +6,17 @@
     "files": true
   },
   "compilerOptions": {
+    "moduleResolution": "node",
+    "outDir": "dist",
     "jsx": "react-jsx",
     "baseUrl": "src",
     "esModuleInterop": true,
     "noImplicitAny": false,
-    "module": "ESNext"
+    "module": "ESNext",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@database/*": ["./src/database/*"]
+    }
   },
   "include": ["./src/"],
   "exclude": ["node_modules"],

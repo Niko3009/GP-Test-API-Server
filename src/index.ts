@@ -1,3 +1,4 @@
+import "module-alias/register";
 import app from "./lib/app.js";
 import logger from "./lib/config/logger.js";
 import env from "./lib/config/environment.js";
