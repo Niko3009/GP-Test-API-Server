@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Сервис обращений пользователей",
+    "description": "REST API для взаимодействия клиента и сервера",
+    "version": "1.0.0"
+  },
+  "host": "http://127.0.0.1:3005 (localhost)",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Получение всех обращений из БД",
+        "responses": {
+          "200": {
+            "description": "Successfully API running",
+            "schema": {
+              "type": "string",
+              "items": "API is running"
+            }
+          }
+        }
+      }
+    },
+
+    "/appeals": {
+      "get": {
+        "description": "Получение всех обращений из БД",
+        "responses": {
+          "200": {
+            "description": "Successfully fetched all data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "autor": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id": "5w469k8lsjylip5",
+                  "date": "2024-02-13T06:05:19.720Z",
+                  "autor": "Иванов И.",
+                  "type": "remark",
+                  "description": "Просьба добавить в сервисе построения новый график.",
+                  "status": "waiting"
+                }
+              }
+            }
+          },
+          "500": { "description": "Internal error" }
+        }
+      }
+    },
+
+    "/appeals/add": {
+      "post": {
+        "description": "Добавление обращения в БД",
+        "responses": {
+          "200": {
+            "description": "Successfully new data adding",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "autor": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id": "5w469k8lsjylip5",
+                  "date": "2024-02-13T06:05:19.720Z",
+                  "autor": "Иванов И.",
+                  "type": "remark",
+                  "description": "Просьба добавить в сервисе построения новый график.",
+                  "status": "waiting"
+                }
+              }
+            }
+          },
+          "500": { "description": "Internal error" }
+        }
+      }
+    },
+
+    "*": {
+      "get": {
+        "description": "Несуществующий роут",
+        "responses": {
+          "404": {
+            "description": "Unknown endpoint",
+
+            "schema": {
+              "type": "string",
+              "items": "Unknown endpoint!"
+            }
+          }
+        }
+      }
+    }
+  }
+}
