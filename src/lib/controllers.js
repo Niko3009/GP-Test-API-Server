@@ -1,3 +1,6 @@
+import uniqid from "uniqid";
+import logger from "../lib/config/logger.js";
+
 import { readData, writeData } from "./dbActions.js";
 import { getResData } from "./funcs/getData.js";
 
@@ -7,52 +10,45 @@ import { getResData } from "./funcs/getData.js";
 //   id: string;
 // }
 
+const availableTypes = ["mistake", "remark", "recommendation"];
+const availableStatuses = ["waiting", "processing", "ready"];
+
 export const getAllAppeals = async (req, res) => {
-  const data = await readData();
-  res.status(200).send(getResData(data));
+  try {
+    const data = await readData();
+    logger.info(`controller getAllAppeals`);
+    res.status(200).send(getResData(data));
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
-// // Получить пользователя по имени.
-// const getBook = (req, res) => {
-//   // const { book_id } = req.params;
-//   const { title } = req.query;
+export const addAppeal = async (req, res) => {
+  try {
+    const body = req.body;
 
-//   Book.findOne({ title })
-//     .then((book) => {
-//       res.status(200).send(resData(book, `found`));
-//     })
-//     .catch((e) => sendError(res, e.message));
-// };
+    const id = uniqid();
+    const date = new Date();
+    const autor = body?.autor;
+    const description = body?.description;
 
-// // Создать пользователя по имени.
-// const createBook = (req, res) => {
-//   const bookData = req.body;
-//   Book.create(bookData)
-//     .then((book) => {
-//       res.status(200).send(resData(book, `created`));
-//     })
-//     .catch((e) => sendError(res, e.message));
-// };
+    const isAvailableType = availableTypes.includes(body?.type);
+    const type = isAvailableType ? body?.type : availableTypes[0];
 
-// // Обновить пользователя по имени.
-// const updateBook = (req, res) => {
-//   const { title } = req.query;
-//   const bookData = req.body;
+    const isAvailableStatus = availableStatuses.includes(body?.status);
+    const status = isAvailableStatus ? body?.status : availableStatuses[0];
 
-//   Book.findOneAndUpdate({ title }, bookData, { new: true, runValidators: true })
-//     .then((book) => {
-//       res.status(200).send(resData(book, `updated`));
-//     })
-//     .catch((e) => sendError(res, e.message));
-// };
+    const newAppeal = { id, date, autor, type, description, status };
 
-// // Удалить пользователя по имени.
-// const deleteBook = (req, res) => {
-//   const { title } = req.query;
+    const oldAppealsList = await readData();
+    const newAppealsList = [...oldAppealsList, newAppeal];
 
-//   Book.findOneAndDelete({ title })
-//     .then((book) => {
-//       res.status(200).send(resData(book, `deleted`));
-//     })
-//     .catch((e) => sendError(res, e.message));
-// };
+    const newData = await writeData(newAppealsList);
+
+    logger.info(`controller addAppeal`);
+    logger.info(JSON.stringify(body));
+    res.status(200).send(getResData(newData));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};

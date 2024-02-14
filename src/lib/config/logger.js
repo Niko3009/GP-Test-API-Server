@@ -2,14 +2,15 @@
 
 import { createLogger, format, transports } from "winston";
 import path from "path";
+import processEnv from "./environment.js";
 
-const env = process.env.NODE_ENV || "development";
+const env = processEnv.ENV || "development";
 const filename = path.join("log", "results.log");
 
 const logger = createLogger({
   level: env === "production" ? "info" : "debug",
   format: format.combine(
-    format.label({ label: path.basename(import.meta?.url) }),
+    format.label({ label: env === "production" ? "prod" : "dev" }),
     format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" })
   ),
   transports: [
@@ -18,7 +19,7 @@ const logger = createLogger({
         format.colorize(),
         format.printf(
           (info) =>
-            `${info.timestamp} ${info.level} [${info.label}]: ${info.message}`
+            `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`
         )
       ),
     }),

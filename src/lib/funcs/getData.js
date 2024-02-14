@@ -1,4 +1,4 @@
-export const getResData = (data = null, status = "success", details = "-") => {
+export const getResData = (data = null, status = "success", details = "ok") => {
   if (data === null && status !== "error") {
     status = "fail";
     details = "data not found";

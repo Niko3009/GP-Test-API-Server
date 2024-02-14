@@ -4,12 +4,9 @@ import cors from "cors";
 
 const app = express();
 
-app.use(parser.json()); // app.use(express.bodyParser());
-// app.use(app.router);
+const options = { origin: "*" }; //   origin: ['http://localhost:3000'],
+app.use(cors(options));
 
-app.use((req, res, next) => {
-  app.use(cors());
-  next();
-});
+app.use(parser.json());
 
 export default app;
