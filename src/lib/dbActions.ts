@@ -4,10 +4,10 @@ const { readFile, writeFile } = fsPromises;
 
 const dbFile = "./src/database/appeals.json";
 
-const options = { encoding: "utf-8" };
+// const options = { encoding: "utf-8" };
 
 export const readData = async () => {
-  const data = JSON.parse(await readFile(dbFile, options));
+  const data = JSON.parse(String(await readFile(dbFile)));
   return data;
 };
 

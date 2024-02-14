@@ -1,5 +1,5 @@
 import uniqid from "uniqid";
-import logger from "../lib/config/logger.js";
+import logger from "./config/logger.js";
 
 import { readData, writeData } from "./dbActions.js";
 import { getResData, getErrData } from "./funcs/getData.js";

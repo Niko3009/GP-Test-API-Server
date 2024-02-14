@@ -31,6 +31,7 @@
     "module-alias": "^2.2.3",
     "mongoose": "^8.1.1",
     "path": "^0.12.7",
+    "ts-node": "^10.9.2",
     "uniqid": "^5.4.0",
     "winston": "^3.11.0"
   }
